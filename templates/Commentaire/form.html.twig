@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {% if commentaire is defined -%}
+        <h3>Modification du commentaire "{{ commentaire.texte }}"</h3>
+    {%- else -%}
+        <h3>Ajout d'un nouveau commentaire</h3>
+    {%- endif %}
+
+    <form method="post">
+        <div class="row my-2">
+            <label class="col-4 text-right pr-2">Article :</label>
+            <input class="col-8" type="text" disabled value="{{ article.titre }}">
+        </div>
+        <div class="row my-2">
+            <label class="col-4 text-right pr-2">Commentaire :</label>
+            <textarea class="col-8" name="texte">
+                {%- if commentaire is defined -%}
+                    {{ commentaire.texte }}
+                {%- endif -%}
+            </textarea>
+        </div>
+
+        <div class="row my-2">
+            <label class="col-4 text-right pr-2">Auteur :</label>
+            <input class="col-8" type="text" name="auteur"
+                   {%- if commentaire is defined -%} value="{{ commentaire.auteur }}"{%- endif -%}>
+        </div>
+
+        <div class="row my-2">
+            <label class="col-4 text-right pr-2">E-mail :</label>
+            <input class="col-8" type="email" name="mail"
+                   {%- if commentaire is defined -%} value="{{ commentaire.mail }}"{%- endif -%}>
+        </div>
+
+        <div class="row my-2">
+            <span class="col-4"></span>
+            <input type="submit" value="Enregistrer les modifications">
+        </div>
+    </form>
+{% endblock %}
